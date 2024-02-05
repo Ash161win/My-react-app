@@ -4,6 +4,7 @@ import Login from './components/login';
 import { UserProvider } from './context/Usercontext';
 import Dboard from './components/dashboard';
 import EditDetail from './components/editdetail';
+import Clist from './components/customer';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 if ('serviceWorker' in navigator) {
@@ -19,6 +20,7 @@ if ('serviceWorker' in navigator) {
 }
 
 function App() {
+
   return (
     <UserProvider>
       <Router>
@@ -26,6 +28,8 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Dboard />} />
           <Route path="/editdetail" element={<EditDetail />} />
+          <Route path="/customer" element={<Clist />} />
+          <Route path="/editdetail/:id" element={<EditDetail />} />
         </Routes>
       </Router>
     </UserProvider>
@@ -33,5 +37,3 @@ function App() {
 }
 
 export default App;
-
-

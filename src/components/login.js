@@ -6,10 +6,11 @@
     import 'slick-carousel/slick/slick.css';
     import 'slick-carousel/slick/slick-theme.css';
     import { useUserContext } from '../context/Usercontext';
-    import {Navigate } from 'react-router-dom';
+    import {useNavigate} from 'react-router-dom';
 
     const Login = () => {
         const { setUsername } = useUserContext();
+        const navigate = useNavigate();
         const [loginSuccess, setLoginSuccess] = useState(false);
     
         const handleLogin = async () => {
@@ -17,13 +18,14 @@
             const password = document.getElementById('password').value;
     
             try {
-                const response = await axios.post('http://localhost:3001/login', {
+                const response = await axios.post('/login', {
                     username,
                     password,
                 });
     
                 setUsername(response.data.username);
                 setLoginSuccess(true);
+                navigate('/dashboard')
             } catch (error) {
                 console.error('Login failed:', error);
             }
@@ -40,10 +42,6 @@
     const paperStyle = { padding: 20, width: 280, margin: '50px auto' };
     const avatarStyle = { backgroundColor: 'black' };
     const btnstyle = { margin: '10px 0px' };
-
-    if (loginSuccess) {
-        return <Navigate to="/dashboard" />;
-    }
 
     return (
         <Grid container direction="column" alignItems="center">
